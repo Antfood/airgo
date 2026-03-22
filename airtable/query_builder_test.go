@@ -86,6 +86,6 @@ func TestQueryBuilder(t *testing.T) {
 }
 
 func buildUrl(base string, table string) string {
-	s, _ := url.JoinPath(baseUrl, base, table)
+	s, _ := url.JoinPath(config.EndpointUrl, base, table)
 	return s
 }

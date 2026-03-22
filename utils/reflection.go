@@ -354,7 +354,7 @@ Example:
    age := GetStructFieldValueByJsonName(p, "MyAge")
 */
 
-func GetStructFieldValueByJsonName(s any, jsonName string) interface{} {
+func GetStructFieldValueByJsonName(s any, jsonName string) any {
 	if s == nil {
 		return nil
 	}

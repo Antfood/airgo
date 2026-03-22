@@ -23,7 +23,7 @@ func TestNewHttpRequest(t *testing.T) {
 	Assert(t, http.MethodGet == httpReq.Method, "Expected '%s', got '%s'", http.MethodGet, httpReq.Method)
 	Assert(t, httpReq.URL.String() == url, "Expected '%s', got '%s'", url, httpReq.URL.String())
 	Assert(t, httpReq.Header.Get("Content-Type") == contentType, "Expected '%s', got '%s'", contentType, httpReq.Header.Get("Content-Type"))
-	Assert(t, httpReq.Header.Get("Authorization") == bearer+token, "Expected '%s', got '%s'", bearer+token, httpReq.Header.Get("Authorization"))
+	Assert(t, httpReq.Header.Get("Authorization") == bearer+config.Token, "Expected '%s', got '%s'", bearer+config.Token, httpReq.Header.Get("Authorization"))
 
 	b, err := io.ReadAll(httpReq.Body)
 	Ok(t, err)

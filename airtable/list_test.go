@@ -157,10 +157,10 @@ func testGetPageSize(t *testing.T) {
 	Assert(t, r == 10, "Expected '10', got '%d'", r)
 
 	r = getPageSize(0)
-	Assert(t, r == maxPageSize, "Expected '%d', got '%d'", maxPageSize, r)
+	Assert(t, r == config.MaxPageSize, "Expected '%d', got '%d'", config.MaxPageSize, r)
 
-	r = getPageSize(maxPageSize + 1)
-	Assert(t, r == maxPageSize, "Expected '%d', got '%d'", maxPageSize, r)
+	r = getPageSize(config.MaxPageSize + 1)
+	Assert(t, r == config.MaxPageSize, "Expected '%d', got '%d'", config.MaxPageSize, r)
 }
 
 func testGetMaxRecords(t *testing.T) {
@@ -168,5 +168,5 @@ func testGetMaxRecords(t *testing.T) {
 	Assert(t, r == 10, "Expected '10', got '%d'", r)
 
 	r = getMaxRecords(0)
-	Assert(t, r == maxPageSize, "Expected '%d', got '%d'", maxPageSize, r)
+	Assert(t, r == config.MaxPageSize, "Expected '%d', got '%d'", config.MaxPageSize, r)
 }

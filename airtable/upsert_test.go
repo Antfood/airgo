@@ -62,7 +62,10 @@ func testGetPrefix(t *testing.T) {
 	Assert(t, msg == createPrefix, "Expected '%s', got '%s'", createPrefix, msg)
 
 	msg = getMsgPrefix([]updateRequest{})
-	Assert(t, msg == updatePrefix, "Expected '%s', got '%s'", createPrefix, msg)
+	Assert(t, msg == updatePrefix, "Expected '%s', got '%s'", updatePrefix, msg)
+
+	msg = getMsgPrefix([]replaceRequest{})
+	Assert(t, msg == replacePrefix, "Expected '%s', got '%s'", replacePrefix, msg)
 }
 
 func testGetMethod(t *testing.T) {
@@ -71,6 +74,9 @@ func testGetMethod(t *testing.T) {
 
 	method = getMethod([]updateRequest{})
 	Assert(t, method == http.MethodPatch, "Expected '%s', got '%s'", http.MethodPatch, method)
+
+	method = getMethod([]replaceRequest{})
+	Assert(t, method == http.MethodPut, "Expected '%s', got '%s'", http.MethodPut, method)
 }
 
 func TestGetVerb(t *testing.T) {
@@ -79,6 +85,9 @@ func TestGetVerb(t *testing.T) {
 
 	verb = getVerb(updatePrefix)
 	Assert(t, verb == "update", "Expected '%s', got '%s'", "update", verb)
+
+	verb = getVerb(replacePrefix)
+	Assert(t, verb == "replace", "Expected '%s', got '%s'", "replace", verb)
 }
 
 func testHandleError(t *testing.T) {
