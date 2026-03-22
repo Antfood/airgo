@@ -99,11 +99,11 @@ func newHttpRequest(ctx context.Context, verb string, url string, body io.Reader
 		return nil, err
 	}
 
-	httpReq.Header.Set("Authorization", bearer+config.Token)
+	httpReq.Header.Set("Authorization", bearer+getToken())
 	httpReq.Header.Set("Content-Type", "application/json")
 
 	// Add custom headers from config
-	for key, value := range config.CustomHeaders {
+	for key, value := range getCustomHeaders() {
 		httpReq.Header.Set(key, value)
 	}
 

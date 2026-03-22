@@ -1,6 +1,9 @@
 package airtable
 
-import "time"
+import (
+	"sync"
+	"time"
+)
 
 // Constants that don't need to be configurable
 const (
@@ -29,14 +32,16 @@ type Config struct {
 	CustomHeaders        map[string]string
 }
 
-var config = Config{
-	EndpointUrl:    DefaultEndpointUrl,
-	MaxPageSize:    DefaultMaxPageSize,
-	MaxUrlLength:   DefaultMaxUrlLength,
-	RequestTimeout: DefaultRequestTimeout,
-}
-
-var client Client = NewAirtableClient()
+var (
+	configMu sync.RWMutex
+	config   = Config{
+		EndpointUrl:    DefaultEndpointUrl,
+		MaxPageSize:    DefaultMaxPageSize,
+		MaxUrlLength:   DefaultMaxUrlLength,
+		RequestTimeout: DefaultRequestTimeout,
+	}
+	client Client = NewAirtableClient()
+)
 
 /*
 SetToken sets the Airtable API token used for authentication.
@@ -46,6 +51,8 @@ Example:
 	airtable.SetToken(os.Getenv("AIRTABLE_TOKEN"))
 */
 func SetToken(airtableToken string) {
+	configMu.Lock()
+	defer configMu.Unlock()
 	config.Token = airtableToken
 }
 
@@ -59,6 +66,8 @@ Example:
 	airtable.Configure(client, os.Getenv("AIRTABLE_TOKEN"))
 */
 func Configure(c Client, airtableToken string) {
+	configMu.Lock()
+	defer configMu.Unlock()
 	config.Token = airtableToken
 	client = c
 }
@@ -78,6 +87,8 @@ Example:
 	})
 */
 func ConfigureWithOptions(cfg Config) {
+	configMu.Lock()
+	defer configMu.Unlock()
 	if cfg.Token != "" {
 		config.Token = cfg.Token
 	}
@@ -106,5 +117,57 @@ func ConfigureWithOptions(cfg Config) {
 GetConfig returns a copy of the current configuration.
 */
 func GetConfig() Config {
+	configMu.RLock()
+	defer configMu.RUnlock()
 	return config
+}
+
+// getToken returns the configured API token (thread-safe).
+func getToken() string {
+	configMu.RLock()
+	defer configMu.RUnlock()
+	return config.Token
+}
+
+// getEndpointUrl returns the configured endpoint URL (thread-safe).
+func getEndpointUrl() string {
+	configMu.RLock()
+	defer configMu.RUnlock()
+	return config.EndpointUrl
+}
+
+// getMaxPageSize returns the configured max page size (thread-safe).
+func getMaxPageSize() int {
+	configMu.RLock()
+	defer configMu.RUnlock()
+	return config.MaxPageSize
+}
+
+// getMaxUrlLength returns the configured max URL length (thread-safe).
+func getMaxUrlLength() int {
+	configMu.RLock()
+	defer configMu.RUnlock()
+	return config.MaxUrlLength
+}
+
+// getCustomHeaders returns a copy of the configured custom headers (thread-safe).
+func getCustomHeaders() map[string]string {
+	configMu.RLock()
+	defer configMu.RUnlock()
+	if config.CustomHeaders == nil {
+		return nil
+	}
+	// Return a copy to prevent concurrent map access
+	headers := make(map[string]string, len(config.CustomHeaders))
+	for k, v := range config.CustomHeaders {
+		headers[k] = v
+	}
+	return headers
+}
+
+// getClient returns the configured HTTP client (thread-safe).
+func getClient() Client {
+	configMu.RLock()
+	defer configMu.RUnlock()
+	return client
 }

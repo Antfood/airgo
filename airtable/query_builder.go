@@ -18,7 +18,7 @@ type queryBuilder struct {
 func (q *queryBuilder) New(baseId string, tableId string) {
 	q.Builder.Reset()
 
-	endpoint, _ := url.JoinPath(config.EndpointUrl, baseId)
+	endpoint, _ := url.JoinPath(getEndpointUrl(), baseId)
 	q.Builder.WriteString(endpoint)
 	q.Builder.WriteString("/")
 	q.Builder.WriteString(tableId)

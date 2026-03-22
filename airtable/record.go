@@ -50,7 +50,7 @@ Example:
 	err = record.SaveCtx(ctx)
 */
 func (r *Record[T]) SaveCtx(ctx context.Context) error {
-	url := config.EndpointUrl + "/" + r.BaseId + "/" + r.TableId
+	url := getEndpointUrl() + "/" + r.BaseId + "/" + r.TableId
 
 	fields, err := utils.StructJsonToMap(r.Fields, utils.WithIgnore())
 
@@ -149,7 +149,7 @@ func (r *Record[T]) ReplaceCtx(ctx context.Context) error {
 		}
 	}
 
-	url := config.EndpointUrl + "/" + r.BaseId + "/" + r.TableId
+	url := getEndpointUrl() + "/" + r.BaseId + "/" + r.TableId
 
 	fields, err := utils.StructJsonToMap(r.Fields, utils.WithoutIgnore())
 	if err != nil {

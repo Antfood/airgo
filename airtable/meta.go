@@ -101,11 +101,12 @@ func ClearFieldCache() {
 }
 
 func fetchTableFields(ctx context.Context, baseId, tableId string) ([]Field, error) {
-	if client == nil {
+	c := getClient()
+	if c == nil {
 		return nil, NewConfigError(OpGetFields, "client not configured; call SetToken or Configure first")
 	}
 
-	url := config.EndpointUrl + metaBasePath + "/" + baseId + "/tables"
+	url := getEndpointUrl() + metaBasePath + "/" + baseId + "/tables"
 
 	var resp metaResponse
 
@@ -115,7 +116,7 @@ func fetchTableFields(ctx context.Context, baseId, tableId string) ([]Field, err
 			return &Error{Op: OpGetFields, Message: "failed to create http request", Err: err}
 		}
 
-		res, err := client.Do(httpReq)
+		res, err := c.Do(httpReq)
 		if err != nil {
 			return &Error{Op: OpGetFields, Message: "failed to make request", Err: err}
 		}

@@ -45,10 +45,10 @@ func replace[T any](ctx context.Context, url string, records Records[T], req ...
 }
 
 func upsert[T any, R createRequest | updateRequest | replaceRequest](ctx context.Context, url string, records Records[T], typecast bool, req ...R) error {
-
 	op := getOperation(req)
 
-	if client == nil {
+	c := getClient()
+	if c == nil {
 		return NewConfigError(op, "client not configured; call SetToken or Configure first")
 	}
 
@@ -73,7 +73,7 @@ func upsert[T any, R createRequest | updateRequest | replaceRequest](ctx context
 			return &Error{Op: op, Message: "failed to create http request", Err: err}
 		}
 
-		resp, err := client.Do(httpReq)
+		resp, err := c.Do(httpReq)
 		if err != nil {
 			return &Error{Op: op, Message: "failed to make request", Err: err}
 		}

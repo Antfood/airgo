@@ -10,8 +10,8 @@ import (
 )
 
 func get[T any](ctx context.Context, getUrl string, record Record[T]) (Record[T], error) {
-
-	if client == nil {
+	c := getClient()
+	if c == nil {
 		return record, NewConfigError(OpGet, "client not configured; call SetToken or Configure first")
 	}
 
@@ -31,7 +31,7 @@ func get[T any](ctx context.Context, getUrl string, record Record[T]) (Record[T]
 			return &Error{Op: OpGet, Message: "failed to create http request", Err: err}
 		}
 
-		res, err := client.Do(httpReq)
+		res, err := c.Do(httpReq)
 		if err != nil {
 			return &Error{Op: OpGet, Message: "failed to make request", Err: err}
 		}

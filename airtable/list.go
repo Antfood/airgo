@@ -43,7 +43,8 @@ type listSortField struct {
 func list[T any](ctx context.Context, baseUrl string, opts Options) (Records[T], error) {
 	var records Records[T]
 
-	if client == nil {
+	c := getClient()
+	if c == nil {
 		return records, NewConfigError(OpList, "client not configured; call SetToken or Configure first")
 	}
 
@@ -54,7 +55,7 @@ func list[T any](ctx context.Context, baseUrl string, opts Options) (Records[T],
 	}
 
 	queryUrl := query.Flush()
-	usePOST := len(queryUrl) > config.MaxUrlLength
+	usePOST := len(queryUrl) > getMaxUrlLength()
 
 	// Get field names for POST request body
 	var fieldNames []string
@@ -96,7 +97,7 @@ func list[T any](ctx context.Context, baseUrl string, opts Options) (Records[T],
 			if err != nil {
 				return &Error{Op: OpList, Message: "failed to create http request", Err: err}
 			}
-			return makeRequest(client, httpReq, &resp, OpList)
+			return makeRequest(c, httpReq, &resp, OpList)
 		})
 
 		if err != nil {
@@ -195,15 +196,16 @@ func newQuery[T any](url string, opts Options) (*queryBuilder, error) {
 }
 
 func getPageSize(limit int) int {
-	if limit > 0 && limit < config.MaxPageSize {
+	maxPageSize := getMaxPageSize()
+	if limit > 0 && limit < maxPageSize {
 		return limit
 	}
-	return config.MaxPageSize
+	return maxPageSize
 }
 
 func getMaxRecords(limit int) int {
 	if limit > 0 {
 		return limit
 	}
-	return config.MaxPageSize
+	return getMaxPageSize()
 }

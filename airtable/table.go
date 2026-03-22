@@ -697,7 +697,7 @@ func (t Table[T]) NewRecords(nbRecords int) Records[T] {
 
 /* createRequestUrl constructs the request URL based on a baseId and tableId. */
 func createRequestUrl(baseId string, tableId string) string {
-	u, err := url.JoinPath(config.EndpointUrl, baseId, tableId)
+	u, err := url.JoinPath(getEndpointUrl(), baseId, tableId)
 	if err != nil {
 		return ""
 	}
