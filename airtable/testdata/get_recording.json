@@ -1,0 +1,213 @@
+{
+   "id": "rec31nnCBdYBLzSTC",
+   "createdTime": "2020-11-25T19:13:59.000Z",
+   "fields": {
+      "at.Counter": 1700,
+      "bp.Database Status": "SYNC to BP",
+      "cmp.Composition Title": [
+         "recYdJnXuvhPjQWzf"
+      ],
+      "p.Initial Project": [
+         "recpcZPHoep7kzFmV"
+      ],
+      "rec.Library": "Anftood",
+      "rec.Catalog": "Antfood",
+      "rec.S3 Location Link": "https://betterproblems-production-originals.s3.amazonaws.com/17151434_Pepsi_Delicious_Pizza_Soliloquy_MUS_170726_YE.wav",
+      "bp.Admin Edit Link": "http://betterproblems-production.herokuapp.com/admin/recordings/2253/edit",
+      "rec.Descriptor": "Original",
+      "rec.Year": "2017",
+      "p.Initial Client": [
+         "recj8IRlbFHYVHLXB"
+      ],
+      "rec.Filename": [
+         "rechroPOsI0bzDzd2"
+      ],
+      "p.Session Folder": "https://www.dropbox.com/home/ANTFOOD%20ARCHIVE/NY%20Archive/2017%20AFNY/2017-10-12/PEPSI%20-%20Expression%20Series/Pepsi_Delicious_Soliloquy_170725%20Project",
+      "p.Session Folder Status": "Correct",
+      "rec.Primary Writer": [
+         "recrEivKjs4iPKN3Z"
+      ],
+      "rec.Owner": [
+         "recDjjSJ1zuakPk4t"
+      ],
+      "rec.Streamable S3 Key": "ijcWb7eHhQj2dUbxcVhad9c7hEj8athZ.mp3",
+      "cy.ID": 1755233,
+      "bp.BPM": 75,
+      "bp.Moods": [
+         "rect3Ia2sm3Rs9V39",
+         "rec6C4SLqEOyxNIPu"
+      ],
+      "bp.Cue": [
+         "rec1YvJUqKtWLjVvc"
+      ],
+      "bp.Tier": [
+         "recBkqot7jSqXaeEn"
+      ],
+      "bp.Tonality": [
+         "recgl8IRgCge7MEDq"
+      ],
+      "bp.Meter": [
+         "recFfRK0emSX2gs5q"
+      ],
+      "bp.Key Signature": [
+         "recl01Jhd3JZodmlD"
+      ],
+      "bp.Shape": [
+         "recIJ3wzkoOcNVBxG"
+      ],
+      "bp.Instrumentations": [
+         "rec1rypUvG3qNhGPN",
+         "recN5SlyyIuVb0nDY",
+         "recBHbZ0kNpAzDD78",
+         "recdVWfgzwXjJbanp"
+      ],
+      "bp.Genres": [
+         "rec76sw3Kt1HllSLd"
+      ],
+      "bp.Conventions": [
+         "recpt54P9dFj6Y2zI",
+         "recirIVEiJjS8KDbG",
+         "recRIfmGOJmy0X5wB",
+         "recEvbySSMULnBrX9",
+         "rec9Hw5R8ekpRGyJb",
+         "recSgWH6FgRspXkEe"
+      ],
+      "bp.Vocals": [
+         "recusn6zcKOdAddca"
+      ],
+      "bp.Temperature": "80",
+      "bp.Weight": "23",
+      "bp.Brightness": "17",
+      "bp.Pacing": "17",
+      "bp.Movement": "79",
+      "bp.Density": "39",
+      "bp.Priority": 5,
+      "bp.Duration": 15,
+      "bp.Keywords": "female vocals moody hip hop drums",
+      "cy.Recording": [
+         "recBkifuU3RrwzFTI"
+      ],
+      "bp.Frontend Status": "Active",
+      "rec.Recording Title": "Soliloquy (Original)",
+      "at.CreatedBy": {
+         "id": "usrUluXd4j2EEgZnt",
+         "email": "pedro@antfood.com",
+         "name": "Pedro Botsaris"
+      },
+      "at.Created Time": "2020-11-25T19:13:59.000Z",
+      "at.RecordURL": "https://airtable.com/tblXufnzCVdNjH8E0/viwai2ME8H53hWotD/rec31nnCBdYBLzSTC",
+      "at.ID": "rec31nnCBdYBLzSTC",
+      "cmp.Recording Count": [
+         1
+      ],
+      "p.Project Reformatting": "PepsiCo - Expression Series - 2017",
+      "cy.URL": "https://app.cyanite.ai/library/1755233",
+      "rec.ID": "REC2700",
+      "cmp.Availability Warning": [
+         "🟢 Clear: never been used"
+      ],
+      "bp.Recording Link-OLD": "https://sphere.betterproblems.com/compositions/2253",
+      "bp.Recording Link-ALT": "https://sphere.betterproblems.com/compositions?search=Soliloquy&spotify_search=&search_type=title",
+      "cy.Augmented Keywords": [
+         "passionate",
+         "weird",
+         "mystical",
+         "contemplative",
+         "gloomy",
+         "sentimental",
+         "thoughtful",
+         "touching",
+         "arcane",
+         "spooky",
+         "groovy",
+         "feeling",
+         "sinister",
+         "scare",
+         "scary",
+         "grave",
+         "ethereal",
+         "creepy",
+         "menacing",
+         "thrilling"
+      ],
+      "cy.Character Tags": [
+         "cool",
+         "playful"
+      ],
+      "cy.MovementTags": [
+         "groovy",
+         "stomping"
+      ],
+      "cy.Subgenre Tags": [
+         "jazzyHipHop"
+      ],
+      "cy.Genre Tags": [
+         "rapHipHop"
+      ],
+      "cy.Mood Advanced Tags": [
+         "spiritual",
+         "laidBack",
+         "seductive",
+         "ponderous",
+         "mysterious"
+      ],
+      "cy.Instrument Tags": [
+         "percussion",
+         "synth",
+         "bass"
+      ],
+      "cy.Mood Tags": [
+         "calm",
+         "chilled",
+         "romantic",
+         "ethereal"
+      ],
+      "cy.Voice Tags": [
+         "instrumental"
+      ],
+      "cy.BPM": [
+         75
+      ],
+      "cy.Key": [
+         "gMinor"
+      ],
+      "cy.Time Signature": [
+         "4/4"
+      ],
+      "cy.Musical Era Tag": [
+         "contemporary"
+      ],
+      "cy.Emotional Dynamics": [
+         "low"
+      ],
+      "cy.Emotional Profile": [
+         "balanced"
+      ],
+      "cy.Energy Level": [
+         "low"
+      ],
+      "cyanite recordings count": 1,
+      "cmp.ID": [
+         "COMP2116"
+      ],
+      "cmp.Composition Type": [
+         "Antfood Original"
+      ],
+      "cmp.Writer Summary": [
+         "75% Yuta Endo (ASCAP) IPI# 749861490\n25% Wilson Montgomery Brown (ASCAP) IPI# 483656616"
+      ],
+      "rec.Recording Credits Writers And Arrangers": "Soliloquy || COMP2116\nAntfood Original written by:\n75% Yuta Endo (ASCAP) IPI# 749861490\n25% Wilson Montgomery Brown (ASCAP) IPI# 483656616",
+      "cmp.Publisher Summary": [
+         "75% Antfood (ASCAP) IPI# 606953632 \n25% Antfood (ASCAP) IPI# 606953632"
+      ],
+      "cmp.Composition Owner": [
+         "recDjjSJ1zuakPk4t"
+      ],
+      "rec.Recording Credits Publishers": "Soliloquy || COMP2116\nAntfood Original published by:\n75% Antfood (ASCAP) IPI# 606953632 \n25% Antfood (ASCAP) IPI# 606953632",
+      "bp.Mood Words[moods]": [
+         "recWeZmlz5zPhjFA3",
+         "rectmFmdD53zaCjq4"
+      ],
+      "rec.Arranger Percentage Total": 0
+   }
+}

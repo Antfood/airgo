@@ -1,0 +1,12 @@
+{
+    "records": [
+        {
+            "id": "rec-0",
+            "deleted": true
+        },
+        {
+            "id": "rec-1",
+            "deleted": true
+        }
+    ]
+}
