@@ -3,7 +3,7 @@ package airtable
 import (
 	"context"
 
-	"github.com/Antfood/airgo/utils"
+	"github.com/pbotsaris/airgo/utils"
 )
 
 /*

@@ -1,4 +1,4 @@
-module github.com/Antfood/airgo
+module github.com/pbotsaris/airgo
 
 go 1.21.4
 

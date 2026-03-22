@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"slices"
 
-	"github.com/Antfood/airgo/utils"
+	"github.com/pbotsaris/airgo/utils"
 )
 
 // filterFormula builds an Airtable filter formula for exact field matching

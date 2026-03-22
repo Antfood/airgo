@@ -28,7 +28,7 @@ The generic `Table[T]` and `Record[T]` types carry through all operations—list
 ## Installation
 
 ```bash
-go get github.com/Antfood/airgo
+go get github.com/pbotsaris/airgo
 ```
 
 ## Quick Start
@@ -165,7 +165,7 @@ type Barcode struct {
 ### 2. Configure the Client
 
 ```go
-import "github.com/Antfood/airgo/airtable"
+import "github.com/pbotsaris/airgo/airtable"
 
 func main() {
     airtable.SetToken(os.Getenv("AIRTABLE_TOKEN"))

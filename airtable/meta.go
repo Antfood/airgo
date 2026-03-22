@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/Antfood/airgo/retry"
+	"github.com/pbotsaris/airgo/retry"
 )
 
 // metaBasePath is appended to EndpointUrl to form the Meta API URL

@@ -3,7 +3,7 @@ package utils
 import (
 	"testing"
 
-	. "github.com/Antfood/airgo/testutils/testutils"
+	. "github.com/pbotsaris/airgo/testutils/testutils"
 )
 
 func TestMap(t *testing.T) {

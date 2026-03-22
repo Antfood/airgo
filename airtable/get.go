@@ -6,7 +6,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/Antfood/airgo/retry"
+	"github.com/pbotsaris/airgo/retry"
 )
 
 func get[T any](ctx context.Context, getUrl string, record Record[T]) (Record[T], error) {

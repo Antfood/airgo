@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	. "github.com/Antfood/airgo/testutils/testutils"
+	. "github.com/pbotsaris/airgo/testutils/testutils"
 )
 
 type testCreatedBy struct {

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-airgo (`github.com/Antfood/airgo`) is a Go library for interacting with the Airtable API. It provides a type-safe, generic interface for CRUD operations on Airtable tables. The library has no external dependencies.
+airgo (`github.com/pbotsaris/airgo`) is a Go library for interacting with the Airtable API. It provides a type-safe, generic interface for CRUD operations on Airtable tables. The library has no external dependencies.
 
 ## Build and Test Commands
 

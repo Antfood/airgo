@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"testing"
 
-	. "github.com/Antfood/airgo/testutils/testutils"
+	. "github.com/pbotsaris/airgo/testutils/testutils"
 )
 
 func TestMockClient(t *testing.T) {

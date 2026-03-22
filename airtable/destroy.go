@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/Antfood/airgo/retry"
-	"github.com/Antfood/airgo/utils"
+	"github.com/pbotsaris/airgo/retry"
+	"github.com/pbotsaris/airgo/utils"
 )
 
 type destroyedRecord struct {

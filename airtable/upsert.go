@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/Antfood/airgo/retry"
+	"github.com/pbotsaris/airgo/retry"
 )
 
 type ResponseBody[T any] struct {

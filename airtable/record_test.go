@@ -4,7 +4,7 @@ package airtable
 import (
 	"testing"
 
-	. "github.com/Antfood/airgo/testutils/testutils"
+	. "github.com/pbotsaris/airgo/testutils/testutils"
 )
 
 
