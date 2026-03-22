@@ -1,0 +1,24 @@
+{
+  "id": "attABC123XYZ",
+  "url": "https://dl.airtable.com/.attachments/abc123/document.pdf",
+  "filename": "document.pdf",
+  "size": 12345,
+  "type": "application/pdf",
+  "thumbnails": {
+    "small": {
+      "url": "https://dl.airtable.com/.attachmentThumbnails/abc123/small",
+      "width": 36,
+      "height": 36
+    },
+    "large": {
+      "url": "https://dl.airtable.com/.attachmentThumbnails/abc123/large",
+      "width": 512,
+      "height": 512
+    },
+    "full": {
+      "url": "https://dl.airtable.com/.attachmentThumbnails/abc123/full",
+      "width": 1024,
+      "height": 768
+    }
+  }
+}

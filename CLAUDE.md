@@ -73,6 +73,26 @@ airtable.ConfigureWithOptions(airtable.Config{
 
 - **Records[T]** (`record.go`): Slice of `*Record[T]` returned by `List()` and `Find()`.
 
+### Field Types (airtable package)
+
+- **Attachment** (`types.go`): Represents an Airtable attachment/file. Contains `ID`, `URL`, `Filename`, `Size`, `Type`, and optional `Thumbnails`. When creating, only `URL` is required.
+
+- **Collaborator** (`types.go`): Represents an Airtable user. Contains `ID`, `Email`, `Name`. Read-only - populated by Airtable based on user actions.
+
+- **Thumbnail** (`types.go`): Represents a thumbnail image with `URL`, `Width`, `Height`. Used within `Thumbnails` struct.
+
+- **Thumbnails** (`types.go`): Container for `Small`, `Large`, and `Full` thumbnail variants. Only present for image attachments.
+
+Example usage in schemas:
+
+```go
+type MySchema struct {
+    Documents  []airtable.Attachment   `json:"Documents"`
+    CreatedBy  *airtable.Collaborator  `json:"Created By"`
+    AssignedTo []airtable.Collaborator `json:"Assigned To"`
+}
+```
+
 ### Query Options (chainable methods on Table)
 
 - `WithLimit(n)`: Records per page (max 100)

@@ -47,6 +47,16 @@ type Track struct {
 }
 ```
 
+For complex Airtable fields, use the built-in types:
+
+```go
+type Track struct {
+    Title     string                  `json:"Title"`
+    Artwork   []airtable.Attachment   `json:"Artwork"`    // file attachments
+    CreatedBy *airtable.Collaborator  `json:"Created By"` // user field (read-only)
+}
+```
+
 ### 2. Configure the Client
 
 ```go
