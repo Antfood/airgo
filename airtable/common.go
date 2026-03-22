@@ -12,15 +12,30 @@ import (
 /*
 Options represents the parameters that will be provided to airtable upon request.
 
-	Limit:   The maximum number of records returned in each request. Must be less than or equal to 100. Default is 100
-	Filter:  A formula used to filter records. See https://support.airtable.com/docs/formula-field-reference for more info
-	Sort:    A slice of Sort structs. airtable.List will sort by the first Sort in the slice, then the second, and so on
+	Limit:          The number of records per page (max 100). Default is 100.
+	MaxRecords:     The maximum total number of records to return across all pages. 0 means no limit.
+	Filter:         A formula used to filter records. See https://support.airtable.com/docs/formula-field-reference
+	Sort:           A slice of Sort structs. airtable.List will sort by the first Sort in the slice, then the second, and so on.
+	Typecast:       If true, Airtable will try to convert string values to the appropriate cell type.
+	Fields:         Only return data for the specified field names. If empty, returns all fields from schema.
+	View:           The name or ID of a view to use for filtering/sorting.
+	CellFormat:     The format for cell values: "json" (default) or "string".
+	TimeZone:       The time zone to use for formatting dates (e.g., "America/New_York").
+	UserLocale:     The locale to use for formatting (e.g., "en-US").
+	RecordMetadata: Additional metadata to return (e.g., "commentCount").
 */
 type Options struct {
-	Limit    int
-	Filter   string
-	Sort     Sorts
-	Typecast bool
+	Limit          int
+	MaxRecords     int
+	Filter         string
+	Sort           Sorts
+	Typecast       bool
+	Fields         []string
+	View           string
+	CellFormat     string
+	TimeZone       string
+	UserLocale     string
+	RecordMetadata []string
 }
 
 /*
@@ -46,19 +61,25 @@ func (s Sorts) Empty() bool {
 /* Private */
 
 type updateRequest struct {
-	Id       string                 `json:"id"` // must have and id
+	Id       string         `json:"id"`
 	Fields   map[string]any `json:"fields"`
-	Typecast bool                   `json:"-"`
+	Typecast bool           `json:"-"`
 }
 
 type createRequest struct {
 	Fields   map[string]any `json:"fields"`
-	Typecast bool                   `json:"-"`
+	Typecast bool           `json:"-"`
 }
 
-type airtableBody[T updateRequest | createRequest] struct {
-	Records []T `json:"records"`
-   Typecast bool `json:"typecast"`
+type replaceRequest struct {
+	Id       string         `json:"id"`
+	Fields   map[string]any `json:"fields"`
+	Typecast bool           `json:"-"`
+}
+
+type airtableBody[T updateRequest | createRequest | replaceRequest] struct {
+	Records  []T  `json:"records"`
+	Typecast bool `json:"typecast"`
 }
 
 type Responder interface {
@@ -78,8 +99,13 @@ func newHttpRequest(verb string, url string, body io.Reader) (*http.Request, err
 		return nil, err
 	}
 
-	httpReq.Header.Set("Authorization", bearer+token)
+	httpReq.Header.Set("Authorization", bearer+config.Token)
 	httpReq.Header.Set("Content-Type", "application/json")
+
+	// Add custom headers from config
+	for key, value := range config.CustomHeaders {
+		httpReq.Header.Set(key, value)
+	}
 
 	return httpReq, nil
 }

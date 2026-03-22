@@ -18,7 +18,7 @@ type queryBuilder struct {
 func (q *queryBuilder) New(baseId string, tableId string) {
 	q.Builder.Reset()
 
-	endpoint, _ := url.JoinPath(baseUrl, baseId)
+	endpoint, _ := url.JoinPath(config.EndpointUrl, baseId)
 	q.Builder.WriteString(endpoint)
 	q.Builder.WriteString("/")
 	q.Builder.WriteString(tableId)
@@ -85,7 +85,56 @@ func (q *queryBuilder) AddSort(sorts Sorts) {
 		dir := fmt.Sprintf("sort%%5B%d%%5D%%5Bdirection%%5D=%s", i, sort.Direction)
 		q.Builder.WriteString(dir)
 	}
+
 	q.Builder.WriteString("&")
+}
+
+func (q *queryBuilder) AddView(view string) {
+	if view == "" {
+		return
+	}
+
+	q.Builder.WriteString("view=")
+	q.Builder.WriteString(url.QueryEscape(view))
+	q.Builder.WriteString("&")
+}
+
+func (q *queryBuilder) AddCellFormat(format string) {
+	if format == "" {
+		return
+	}
+
+	q.Builder.WriteString("cellFormat=")
+	q.Builder.WriteString(url.QueryEscape(format))
+	q.Builder.WriteString("&")
+}
+
+func (q *queryBuilder) AddTimeZone(tz string) {
+	if tz == "" {
+		return
+	}
+
+	q.Builder.WriteString("timeZone=")
+	q.Builder.WriteString(url.QueryEscape(tz))
+	q.Builder.WriteString("&")
+}
+
+func (q *queryBuilder) AddUserLocale(locale string) {
+	if locale == "" {
+		return
+	}
+
+	q.Builder.WriteString("userLocale=")
+	q.Builder.WriteString(url.QueryEscape(locale))
+	q.Builder.WriteString("&")
+}
+
+func (q *queryBuilder) AddRecordMetadata(metadata []string) {
+	for _, m := range metadata {
+		q.Builder.WriteString("recordMetadata%5B%5D=")
+		q.Builder.WriteString(url.QueryEscape(m))
+		q.Builder.WriteString("&")
+	}
 }
 
 func (q *queryBuilder) Flush() string {
