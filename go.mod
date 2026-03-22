@@ -1,3 +1,3 @@
-module github.com/Antfood/airtable-go
+module github.com/Antfood/airgo
 
 go 1.21.4
