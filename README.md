@@ -2,6 +2,30 @@
 
 A type-safe Go client for the Airtable API using generics.
 
+## Design
+
+airgo uses Go generics to map Airtable tables to typed structs. You define your schema once, and all operations return typed data instead of `map[string]interface{}`.
+
+```go
+type Track struct {
+    Title    string   `json:"Title"`
+    Artist   string   `json:"Artist"`
+    Duration int      `json:"Duration (seconds)"`
+    Tags     []string `json:"Tags"`
+}
+
+table := airtable.NewTable[Track]("baseId", "Tracks")
+records, _ := table.List()
+
+// records is []Record[Track]
+for _, r := range records {
+    fmt.Println(r.Fields.Title)       // string
+    fmt.Println(r.Fields.Duration)    // int
+}
+```
+
+The generic `Table[T]` and `Record[T]` types carry through all operations—listing, creating, updating—so you work with your schema type throughout.
+
 ## Installation
 
 ```bash
