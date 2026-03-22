@@ -26,14 +26,17 @@ For instance, if your Airtable table has fields 'Name' and 'Age', you might defi
 The record then becomes Record[MySchema].
 */
 type Record[T any] struct {
-	Id      string `json:"id"`
-	TableId string
-	BaseId  string
-	Error   struct {
+	Id          string `json:"id"`
+	CreatedTime string `json:"createdTime,omitempty"`
+	TableId     string `json:"-"`
+	BaseId      string `json:"-"`
+	Error       struct {
 		Message string `json:"message"`
 	} `json:"error"`
-	Fields T `json:"fields"`
-   Typecast bool 
+	Fields   T    `json:"fields"`
+	Typecast bool `json:"-"`
+	// CommentCount is populated when WithRecordMetadata("commentCount") is used
+	CommentCount *int `json:"commentCount,omitempty"`
 }
 
 /*
@@ -51,7 +54,7 @@ Example:
 	err = record.Save()
 */
 func (r *Record[T]) Save() error {
-	url := fmt.Sprintf("%s/%s/%s", baseUrl, r.BaseId, r.TableId)
+	url := fmt.Sprintf("%s/%s/%s", config.EndpointUrl, r.BaseId, r.TableId)
 
 	fields, err := utils.StructJsonToMap(r.Fields, utils.WithIgnore())
 
@@ -97,6 +100,35 @@ func (r *Record[T]) Destroy() (*destroyedRecord, error) {
 	records[0].BaseId = r.BaseId
 
 	return records[0], err
+}
+
+/*
+Replace performs a full replacement of the record in Airtable using PUT.
+Unlike Save (which uses PATCH for updates), Replace will clear any fields not provided.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	record, err := table.Get("rec123")
+
+	// Replace entire record - fields not set will be cleared
+	record.Fields = MySchema{Name: "New Name"} // Age will be cleared
+
+	err = record.Replace()
+*/
+func (r *Record[T]) Replace() error {
+	if r.Id == "" {
+		return fmt.Errorf("airtable.Record.Replace: Cannot replace record without Id")
+	}
+
+	url := fmt.Sprintf("%s/%s/%s", config.EndpointUrl, r.BaseId, r.TableId)
+
+	fields, err := utils.StructJsonToMap(r.Fields, utils.WithoutIgnore())
+	if err != nil {
+		return fmt.Errorf("airtable.Record.Replace: %s", err.Error())
+	}
+
+	return replace(url, Records[T]{r}, replaceRequest{Id: r.Id, Fields: fields, Typecast: r.Typecast})
 }
 
 /*

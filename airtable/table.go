@@ -9,10 +9,17 @@ import (
 )
 
 var defaultOptions = Options{
-	Limit:    10,
-	Filter:   "",
-	Sort:     Sorts{},
-	Typecast: false,
+	Limit:          10,
+	MaxRecords:     0,
+	Filter:         "",
+	Sort:           Sorts{},
+	Typecast:       false,
+	Fields:         nil,
+	View:           "",
+	CellFormat:     "",
+	TimeZone:       "",
+	UserLocale:     "",
+	RecordMetadata: nil,
 }
 
 /*
@@ -132,6 +139,102 @@ func (t *Table[T]) WithTypecast() *Table[T] {
 }
 
 /*
+WithMaxRecords sets the maximum total number of records to return across all pages.
+This is different from Limit which controls records per page.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	records, err := table.WithMaxRecords(500).List() // Returns up to 500 records total
+*/
+func (t *Table[T]) WithMaxRecords(max int) *Table[T] {
+	t.Options.MaxRecords = max
+	return t
+}
+
+/*
+WithFields specifies which fields to return from the Airtable.
+If not specified, all fields from the schema are returned.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	records, err := table.WithFields("name", "age").List()
+*/
+func (t *Table[T]) WithFields(fields ...string) *Table[T] {
+	t.Options.Fields = fields
+	return t
+}
+
+/*
+WithView specifies a view to use for filtering and sorting.
+The view's filters and sorts will be applied to the results.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	records, err := table.WithView("Grid view").List()
+*/
+func (t *Table[T]) WithView(view string) *Table[T] {
+	t.Options.View = view
+	return t
+}
+
+/*
+WithCellFormat specifies the format for cell values.
+Options are "json" (default) or "string".
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	records, err := table.WithCellFormat("string").List()
+*/
+func (t *Table[T]) WithCellFormat(format string) *Table[T] {
+	t.Options.CellFormat = format
+	return t
+}
+
+/*
+WithTimeZone specifies the time zone for formatting dates.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	records, err := table.WithTimeZone("America/New_York").List()
+*/
+func (t *Table[T]) WithTimeZone(tz string) *Table[T] {
+	t.Options.TimeZone = tz
+	return t
+}
+
+/*
+WithUserLocale specifies the locale for formatting values.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	records, err := table.WithUserLocale("en-US").List()
+*/
+func (t *Table[T]) WithUserLocale(locale string) *Table[T] {
+	t.Options.UserLocale = locale
+	return t
+}
+
+/*
+WithRecordMetadata specifies additional metadata to return with each record.
+For example, "commentCount" returns the number of comments on each record.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	records, err := table.WithRecordMetadata("commentCount").List()
+*/
+func (t *Table[T]) WithRecordMetadata(metadata ...string) *Table[T] {
+	t.Options.RecordMetadata = metadata
+	return t
+}
+
+/*
 List retrieves records from from a table base on the provided schema T.
 
 Example:
@@ -204,6 +307,40 @@ func (t Table[T]) Update(records ...*Record[T]) error {
 	}
 
 	return update(url, records, updateRequests...)
+}
+
+/*
+Replace performs a full replacement of records in the Airtable using PUT.
+Unlike Update (PATCH), Replace will clear any fields not provided in the request.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+
+	records, err := table.WithLimit(2).List()
+
+	// Replace entire record - fields not set will be cleared
+	for _, r := range records {
+	    r.Fields = MySchema{Name: "New Name"} // Age will be cleared
+	}
+
+	err := table.Replace(records...)
+*/
+func (t Table[T]) Replace(records ...*Record[T]) error {
+	url := createRequestUrl(t.BaseId, t.TableId)
+
+	replaceRequests := make([]replaceRequest, len(records))
+
+	for i, r := range records {
+		fields, err := utils.StructJsonToMap(r.Fields, utils.WithoutIgnore())
+
+		if err != nil {
+			return fmt.Errorf("airtable.Replace: Error converting struct to map: %v", err)
+		}
+		replaceRequests[i] = replaceRequest{r.Id, fields, t.Options.Typecast}
+	}
+
+	return replace(url, records, replaceRequests...)
 }
 
 /*
@@ -292,10 +429,76 @@ func (t Table[T]) Find(field, value string) (Records[T], error) {
 	}
 
 	if slices.Contains(fieldNames, field) {
-			return t.WithFilter(fmt.Sprintf("{%s} = '%s'", field, value)).List()
-		}
+		return t.WithFilter(fmt.Sprintf("{%s} = '%s'", field, value)).List()
+	}
 
 	return nil, fmt.Errorf("airtable.Find: Field '%s' not found in schema %v", field, schema)
+}
+
+/*
+GetFields retrieves field metadata for this table from the Airtable Meta API.
+Results are cached after the first call. Use RefreshFields to force a refresh.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	fields, err := table.GetFields()
+	for _, f := range fields {
+	    fmt.Printf("Field: %s (ID: %s), Type: %s\n", f.Name, f.Id, f.Type)
+	}
+*/
+func (t *Table[T]) GetFields() ([]Field, error) {
+	// Check cache first
+	if fields := cache.get(t.BaseId, t.TableId); fields != nil {
+		return fields, nil
+	}
+
+	// Fetch from Meta API
+	fields, err := fetchTableFields(t.BaseId, t.TableId)
+	if err != nil {
+		return nil, err
+	}
+
+	// Cache the result
+	cache.set(t.BaseId, t.TableId, fields)
+	return fields, nil
+}
+
+/*
+GetField retrieves a single field by name or ID.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	field, err := table.GetField("Name")
+	fmt.Printf("Field ID: %s, Type: %s\n", field.Id, field.Type)
+*/
+func (t *Table[T]) GetField(nameOrId string) (*Field, error) {
+	fields, err := t.GetFields()
+	if err != nil {
+		return nil, err
+	}
+
+	for _, f := range fields {
+		if f.Name == nameOrId || f.Id == nameOrId {
+			return &f, nil
+		}
+	}
+
+	return nil, fmt.Errorf("airtable.GetField: Field '%s' not found", nameOrId)
+}
+
+/*
+RefreshFields clears the cache and fetches fresh field metadata from the Meta API.
+
+Example:
+
+	table := airtable.NewTable[MySchema]("baseId", "tableId")
+	fields, err := table.RefreshFields() // Forces a fresh fetch
+*/
+func (t *Table[T]) RefreshFields() ([]Field, error) {
+	cache.delete(t.BaseId, t.TableId)
+	return t.GetFields()
 }
 
 /*
@@ -333,7 +536,7 @@ func (t Table[T]) NewRecords(nbRecords int) Records[T] {
 
 /* createRequestUrl constructs the request URL based on a baseId and tableId. */
 func createRequestUrl(baseId string, tableId string) string {
-	u, err := url.JoinPath(baseUrl, baseId, tableId)
+	u, err := url.JoinPath(config.EndpointUrl, baseId, tableId)
 	if err != nil {
 		return ""
 	}

@@ -11,8 +11,9 @@ import (
 )
 
 const (
-	updatePrefix = "airtable.Update:"
-	createPrefix = "airtable.Create:"
+	updatePrefix  = "airtable.Update:"
+	createPrefix  = "airtable.Create:"
+	replacePrefix = "airtable.Replace:"
 )
 
 type ResponseBody[T any] struct {
@@ -30,16 +31,26 @@ func update[T any](url string, records Records[T], req ...updateRequest) error {
 }
 
 func insert[T any](url string, records Records[T], req ...createRequest) error {
- var typecast bool
+	var typecast bool
 
-  if len(req) > 0 {
-     typecast = req[0].Typecast
-  }
+	if len(req) > 0 {
+		typecast = req[0].Typecast
+	}
 
 	return upsert(url, records, typecast, req...)
 }
 
-func upsert[T any, R createRequest | updateRequest](url string, records Records[T], typecast bool, req ...R) error {
+func replace[T any](url string, records Records[T], req ...replaceRequest) error {
+	var typecast bool
+
+	if len(req) > 0 {
+		typecast = req[0].Typecast
+	}
+
+	return upsert(url, records, typecast, req...)
+}
+
+func upsert[T any, R createRequest | updateRequest | replaceRequest](url string, records Records[T], typecast bool, req ...R) error {
 
 	prefix := getMsgPrefix(req)
 
@@ -95,23 +106,28 @@ func upsert[T any, R createRequest | updateRequest](url string, records Records[
 	})
 }
 
+
 func getMsgPrefix(records any) string {
 	switch records.(type) {
 	case []createRequest:
 		return createPrefix
 	case []updateRequest:
 		return updatePrefix
+	case []replaceRequest:
+		return replacePrefix
 	default:
 		return createPrefix
 	}
 }
 
-func getMethod(records interface{}) string {
+func getMethod(records any) string {
 	switch records.(type) {
 	case []createRequest:
 		return http.MethodPost
 	case []updateRequest:
 		return http.MethodPatch
+	case []replaceRequest:
+		return http.MethodPut
 	default:
 		return http.MethodPost
 	}
@@ -120,7 +136,7 @@ func getMethod(records interface{}) string {
 func handleError(resp *http.Response, prefix string) error {
 	verb := getVerb(prefix)
 
-	var atErrorResponse map[string]interface{}
+	var atErrorResponse map[string]any
 
 	bodyData, err := io.ReadAll(resp.Body)
 
@@ -140,10 +156,10 @@ func handleError(resp *http.Response, prefix string) error {
 		getErrorMessage(atErrorResponse))
 }
 
-func getErrorMessage(err interface{}) string {
+func getErrorMessage(err any) string {
     switch errorType := err.(type) {
 
-    case map[string]interface{}:
+    case map[string]any:
         if errorMsg, ok := errorType["message"].(string); ok {
             return errorMsg
         }
@@ -166,9 +182,12 @@ func getErrorMessage(err interface{}) string {
 }
 
 func getVerb(prefix string) string {
-	if prefix == updatePrefix {
+	switch prefix {
+	case updatePrefix:
 		return "update"
+	case replacePrefix:
+		return "replace"
+	default:
+		return "create"
 	}
-
-	return "create"
 }
