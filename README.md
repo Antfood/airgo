@@ -57,6 +57,111 @@ type Track struct {
 }
 ```
 
+## Field Type Reference
+
+Map Airtable field types to Go types as follows:
+
+| Airtable Field | Go Type | Notes |
+|----------------|---------|-------|
+| Single line text | `string` | |
+| Long text | `string` | May contain markdown or mentions |
+| Email | `string` | |
+| URL | `string` | |
+| Phone number | `string` | |
+| Number | `float64` or `int` | Use `float64` for decimals |
+| Currency | `float64` | |
+| Percent | `float64` | Stored as decimal (0.5 = 50%) |
+| Duration | `int` | Seconds |
+| Rating | `int` | 1-5 (or max configured) |
+| Checkbox | `bool` | |
+| Date | `string` | ISO 8601 format: "2024-03-22" |
+| Date and time | `string` | ISO 8601: "2024-03-22T14:30:00.000Z" |
+| Single select | `string` | Option name |
+| Multiple select | `[]string` | Array of option names |
+| Attachment | `[]airtable.Attachment` | See Attachment type below |
+| Collaborator | `*airtable.Collaborator` | Single user |
+| Multiple collaborators | `[]airtable.Collaborator` | Multiple users |
+| Link to another record | `[]string` | Array of record IDs |
+| Barcode | `*YourBarcodeType` | Custom struct (see below) |
+| Button | Read-only | Cannot be set via API |
+| Formula | `string`, `float64`, or `any` | Depends on formula result |
+| Rollup | `any` | Depends on rollup configuration |
+| Lookup | `[]any` | Array of looked-up values |
+| Count | `int` | Read-only |
+| Auto number | `int` | Read-only |
+| Created time | `string` | Read-only, ISO 8601 |
+| Last modified time | `string` | Read-only, ISO 8601 |
+| Created by | `*airtable.Collaborator` | Read-only |
+| Last modified by | `*airtable.Collaborator` | Read-only |
+
+### Complete Example
+
+Here's a schema using all common field types:
+
+```go
+type Record struct {
+    // Editable fields
+    Name         string                  `json:"Name"`
+    Notes        string                  `json:"Notes,omitempty"`
+    Email        string                  `json:"Email,omitempty"`
+    Website      string                  `json:"Website,omitempty"`
+    Phone        string                  `json:"Phone,omitempty"`
+    Status       string                  `json:"Status,omitempty"`       // single select
+    Tags         []string                `json:"Tags,omitempty"`         // multi select
+    Price        float64                 `json:"Price,omitempty"`
+    Quantity     int                     `json:"Quantity,omitempty"`
+    Discount     float64                 `json:"Discount,omitempty"`     // percent (0.1 = 10%)
+    Duration     int                     `json:"Duration,omitempty"`     // seconds
+    Rating       int                     `json:"Rating,omitempty"`
+    IsActive     bool                    `json:"Active,omitempty"`
+    DueDate      string                  `json:"Due Date,omitempty"`
+    Assignee     *airtable.Collaborator  `json:"Assignee,omitempty"`
+    Team         []airtable.Collaborator `json:"Team,omitempty"`
+    Attachments  []airtable.Attachment   `json:"Attachments,omitempty"`
+    RelatedItems []string                `json:"Related Items,omitempty"` // linked records
+
+    // Read-only fields (use update:"ignore" to exclude from updates)
+    Formula      string                  `json:"Formula,omitempty" update:"ignore"`
+    CreatedBy    *airtable.Collaborator  `json:"Created By,omitempty" update:"ignore"`
+    CreatedTime  string                  `json:"Created Time,omitempty" update:"ignore"`
+    ModifiedBy   *airtable.Collaborator  `json:"Modified By,omitempty" update:"ignore"`
+    ModifiedTime string                  `json:"Modified Time,omitempty" update:"ignore"`
+    RecordCount  int                     `json:"Record Count,omitempty" update:"ignore"`
+    AutoNumber   int                     `json:"ID,omitempty" update:"ignore"`
+}
+```
+
+### Built-in Types
+
+**Attachment:**
+```go
+type Attachment struct {
+    ID         string      `json:"id,omitempty"`
+    URL        string      `json:"url"`           // Required when creating
+    Filename   string      `json:"filename,omitempty"`
+    Size       int         `json:"size,omitempty"`
+    Type       string      `json:"type,omitempty"`
+    Thumbnails *Thumbnails `json:"thumbnails,omitempty"`
+}
+```
+
+**Collaborator:**
+```go
+type Collaborator struct {
+    ID    string `json:"id"`
+    Email string `json:"email"`
+    Name  string `json:"name"`
+}
+```
+
+**Custom Barcode type (define in your code):**
+```go
+type Barcode struct {
+    Text string `json:"text,omitempty"`
+    Type string `json:"type,omitempty"` // e.g., "upce", "code39"
+}
+```
+
 ### 2. Configure the Client
 
 ```go
@@ -298,6 +403,53 @@ airtable.ConfigureWithOptions(airtable.Config{
     NoRetryIfRateLimited: true,
 })
 ```
+
+## Development
+
+### Make Commands
+
+| Command | API Calls | Description |
+|---------|-----------|-------------|
+| `make test` | No | Run all unit tests |
+| `make test-verbose` | No | Run unit tests with verbose output |
+| `make test-unit` | No | Run unit tests only (skips integration) |
+| `make test-integration` | No | Replay integration tests from recorded fixtures |
+| `make test-record` | **Yes** | Record new fixtures by calling the real Airtable API |
+| `make lint` | No | Run golangci-lint |
+
+### Integration Tests
+
+Integration tests use [go-vcr](https://github.com/dnaeon/go-vcr) to record and replay HTTP interactions. This allows testing against real API responses without making API calls on every test run.
+
+**First time setup:**
+
+1. Create a `.env` file with your Airtable token:
+   ```
+   AIRTABLE_KEY=patXXXXXXXXXXXXXX
+   ```
+
+2. Record fixtures (calls the real API):
+   ```bash
+   make test-record
+   ```
+
+3. Fixtures are saved to `airtable/testdata/fixtures/*.yaml`
+
+**Normal development:**
+
+```bash
+make test-integration  # Replays from fixtures, no API calls
+make test              # Runs all unit tests
+```
+
+**Refreshing fixtures:**
+
+When the Airtable API changes or you need fresh data:
+```bash
+make test-record  # Re-records all fixtures
+```
+
+Recorded fixtures have auth headers automatically scrubbed and can be committed to version control.
 
 ## License
 

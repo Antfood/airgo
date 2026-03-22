@@ -1,0 +1,63 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        transfer_encoding: []
+        trailer: {}
+        host: api.airtable.com
+        remote_addr: ""
+        request_uri: ""
+        body: ""
+        form: {}
+        headers:
+            Content-Type:
+                - application/json
+        url: https://api.airtable.com/v0/appojF8QxBOqb1Jvc/tblbO7Sj13weO8rdB?fields%5B%5D=name&fields%5B%5D=notes&fields%5B%5D=assignee&fields%5B%5D=single+select&fields%5B%5D=attachments&fields%5B%5D=checkbox&fields%5B%5D=date&fields%5B%5D=multi+select&fields%5B%5D=phone+number&fields%5B%5D=email&fields%5B%5D=url&fields%5B%5D=number&fields%5B%5D=currency&fields%5B%5D=percent&fields%5B%5D=duration&fields%5B%5D=rating&fields%5B%5D=barcode&fields%5B%5D=link&fields%5B%5D=formula&fields%5B%5D=created+by&fields%5B%5D=created+time&fields%5B%5D=Last+Modified+By&fields%5B%5D=Last+Modified&fields%5B%5D=button&fields%5B%5D=lookup&fields%5B%5D=rollup&fields%5B%5D=count&fields%5B%5D=autonumber&pageSize=10&maxRecords=10
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        transfer_encoding: []
+        trailer: {}
+        content_length: -1
+        uncompressed: true
+        body: '{"records":[{"id":"rec2TFIw7Omouy71Q","createdTime":"2026-03-22T13:55:37.000Z","fields":{"name":"testRecord","notes":"test note","assignee":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"single select":"selection 1","attachments":[{"id":"attfp5x4g4cj6Wkcz","url":"https://v5.airtableusercontent.com/v3/u/51/51/1774202400000/JwSWWKV7bnjBo_4eCadoew/TLA_q3k1OPmYvt37YpRI7qnUlbD9gaj_3noEgynr5PmS6cRogGcNjtjfmRTOsIizpFNsQPtYYPiIyKvx07OO7u6n6jGLqNoMWf7aRfq3SHcUC1vd7cutBQWkU1ejsTO4VWV9fIvvb-ELIZ-Vc9dcHg/dB3Xpi-ihTguwhjXFOKiADw_AeA42gyojmxuJls2MYQ","filename":"cuica.wav","size":579180,"type":"audio/wav"},{"id":"attwaWVsTOQHNYWyF","width":545,"height":561,"url":"https://v5.airtableusercontent.com/v3/u/51/51/1774202400000/DoMy5VPTLD_H5Ho8bBQx0A/ow_AGnULZ36hlz0X-HrU1oAan0i6CC-WcaSeKm3XvdlpHVEa0lmF4LShOMLLR4O1wXSj4sc1iRbbxeRQupaJZBO3KR6im8cVwutwNM7TNaEmhSWsWl0TVmLjBWVhz8jEVx9bYnJeAA7Ac0QZeOa7Hw/ZT9o-qK4BY7b6-RNJXS7eU9asoz2245hoCitgid929Q","filename":"brit.png","size":364892,"type":"image/png","thumbnails":{"small":{"url":"https://v5.airtableusercontent.com/v3/u/51/51/1774202400000/VTr-_rNPr5SwI8ZtA58-5w/H0M0H6nnWGFhqXiiK8-y2jE_6mQ4SjybP_t7gdyzBgCh1IBSrBYyluXvIYnRy2BjXUtL7-1AiwVj0AmzRyA2TDIHvYg1KKvNoaT5eAsV6xluXa7fTsrtPeZ_Y2FdJjsD2CA6nQRyQ8Tgu2QsIFVlfQ/Oux27a1BG_6dr3NtGg8jCSvnhCFmpWrjQZOnSVvYOZM","width":35,"height":36},"large":{"url":"https://v5.airtableusercontent.com/v3/u/51/51/1774202400000/SOyqvwBoNtMCc_6ZMP_fbg/_s60VPzVX4D6Vobsx_4Jgv8u_JFHqrnUzIMZ4PJXqGYpA1mzgNCol7R8iVjx8QYrNv32JraH0QEbS3xYgdYQRjb0yqEhI-BCYT7wqXyl58Op-wMs0sgA76THVu16aWDdv_vn5TkIRvvT5GWts4sMjA/NJk2SzFWOSIr-FDiF2Uh7zqT4dXf3ouDPTJPdIgjBcc","width":512,"height":527},"full":{"url":"https://v5.airtableusercontent.com/v3/u/51/51/1774202400000/lUf2L6PSAie_pAEBRneD7w/45zUol_GfgssqpqEVS3UACUvJI5LTrMTUvmcPeHC1DU3V96vB-Cp3uvlSd5iPupjgVW6IMMpdnAn93Q__Eq6X4ZSOIBomGzIkdjYOiIE-ToSN8PgqRnAXI_u2xFY4eqrrTfFkB0TAw_K0kjx75grsA/Uckxra7wKpE7Ez1k8OnSzkh-zVMtQi2jnV7H2D0rW2E","width":545,"height":561}}}],"formula":"1 + 2 = 3","checkbox":true,"date":"2026-03-17","created by":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"created time":"2026-03-22T13:55:37.000Z","Last Modified By":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"Last Modified":"2026-03-22T14:11:01.000Z","multi select":["selection 1","selection 3"],"phone number":"+1 123 345 6789","email":"pedro@antfood.com","url":"www.antfood.com","number":2.34,"currency":1000,"percent":0.1,"duration":7200,"rating":4,"button":{"label":"Button","url":"www.antfood.com"},"link":["recQSqt7EVaDyEuZ3","recyqcoQRiHoqtUPp"],"lookup":["test notes","test notes 2"],"rollup":["other name 1","other name 2"],"count":2,"autonumber":1,"barcode":{"text":"036000291452"}}},{"id":"recQjFccw52r5Ues2","createdTime":"2026-03-22T14:26:22.000Z","fields":{"name":"Integration Test Record","notes":"Created by integration test","single select":"selection 1","formula":"1 + 2 = 3","checkbox":true,"date":"2026-03-22","created by":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"created time":"2026-03-22T14:26:22.000Z","Last Modified By":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"Last Modified":"2026-03-22T14:26:22.000Z","multi select":["selection 1","selection 2"],"phone number":"+1 555 123 4567","email":"test@example.com","url":"https://example.com","number":42.5,"currency":99.99,"percent":0,"duration":0,"rating":4,"button":{"label":"Button","url":"www.antfood.com"},"rollup":[],"count":0,"autonumber":2}}]}'
+        headers:
+            Access-Control-Allow-Headers:
+                - authorization,content-length,content-type,user-agent,x-airtable-application-id,x-airtable-user-agent,x-api-version,x-requested-with
+            Access-Control-Allow-Methods:
+                - DELETE,GET,OPTIONS,PATCH,POST,PUT
+            Access-Control-Allow-Origin:
+                - '*'
+            Airtable-Datacenter-Regions:
+                - us-east-1
+            Airtable-Uncompressed-Content-Length:
+                - "3581"
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sun, 22 Mar 2026 14:29:09 GMT
+            Server:
+                - Tengine
+            Set-Cookie:
+                - AWSALBTG=3jvD0AsDL8Man3RX2FyUTaUnJImyoMpagSbRekNlrOE7YdIvYlk7R4g48xf4EdugeYKLH9Ab+sEDIzTVBxeoR4lfKaAmgJmeeXd2zf2GMFwZCzOcfnrYfFXjXDDi/Q8A46TkRnsAEP3yNO3ach5GAJX7pK8EHhAWC6mxXDNfsgUsv4UIOe8=; Expires=Sun, 29 Mar 2026 14:29:09 GMT; Path=/
+                - AWSALBTGCORS=3jvD0AsDL8Man3RX2FyUTaUnJImyoMpagSbRekNlrOE7YdIvYlk7R4g48xf4EdugeYKLH9Ab+sEDIzTVBxeoR4lfKaAmgJmeeXd2zf2GMFwZCzOcfnrYfFXjXDDi/Q8A46TkRnsAEP3yNO3ach5GAJX7pK8EHhAWC6mxXDNfsgUsv4UIOe8=; Expires=Sun, 29 Mar 2026 14:29:09 GMT; Path=/; SameSite=None; Secure
+                - brw=brwRCWV47MDDtpFXy; path=/; expires=Mon, 22 Mar 2027 14:29:09 GMT; domain=.airtable.com; samesite=none; secure
+                - brwConsent=opt-in; path=/; expires=Sun, 22 Mar 2026 14:34:09 GMT; domain=.airtable.com; samesite=none; secure
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - DENY
+        status: 200 OK
+        code: 200
+        duration: 1.117755916s

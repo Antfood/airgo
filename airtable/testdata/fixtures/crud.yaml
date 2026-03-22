@@ -1,0 +1,305 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 442
+        transfer_encoding: []
+        trailer: {}
+        host: api.airtable.com
+        remote_addr: ""
+        request_uri: ""
+        body: '{"records":[{"fields":{"assignee":null,"attachments":null,"barcode":null,"checkbox":true,"currency":99.99,"date":"2026-03-22","duration":0,"email":"test@example.com","link":null,"multi select":["selection 1","selection 2"],"name":"Integration Test Record","notes":"Created by integration test","number":42.5,"percent":0,"phone number":"+1 555 123 4567","rating":4,"single select":"selection 1","url":"https://example.com"}}],"typecast":false}'
+        form: {}
+        headers:
+            Content-Type:
+                - application/json
+        url: https://api.airtable.com/v0/appojF8QxBOqb1Jvc/tblbO7Sj13weO8rdB
+        method: POST
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        transfer_encoding: []
+        trailer: {}
+        content_length: -1
+        uncompressed: true
+        body: '{"records":[{"id":"recSwCMsuTlt6Pm7y","createdTime":"2026-03-22T14:29:11.000Z","fields":{"name":"Integration Test Record","notes":"Created by integration test","single select":"selection 1","formula":"1 + 2 = 3","checkbox":true,"date":"2026-03-22","created by":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"created time":"2026-03-22T14:29:11.000Z","Last Modified By":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"Last Modified":"2026-03-22T14:29:11.000Z","multi select":["selection 1","selection 2"],"phone number":"+1 555 123 4567","email":"test@example.com","url":"https://example.com","number":42.5,"currency":99.99,"percent":0,"duration":0,"rating":4,"button":{"label":"Button","url":"www.antfood.com"},"rollup":[],"count":0,"autonumber":3}}]}'
+        headers:
+            Access-Control-Allow-Headers:
+                - authorization,content-length,content-type,user-agent,x-airtable-application-id,x-airtable-user-agent,x-api-version,x-requested-with
+            Access-Control-Allow-Methods:
+                - DELETE,GET,OPTIONS,PATCH,POST,PUT
+            Access-Control-Allow-Origin:
+                - '*'
+            Airtable-Datacenter-Regions:
+                - us-east-1
+            Airtable-Uncompressed-Content-Length:
+                - "815"
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sun, 22 Mar 2026 14:29:10 GMT
+            Server:
+                - Tengine
+            Set-Cookie:
+                - AWSALBTG=x9dCI6oQRrQno+EaJ/Cp02w5V51h4ZygmwWp92kh4eoTMlZCKE/i36InEqyD/R14WfxAlpVY9NC8dPibvIlE6kcradRMKx9jstR9Vg0jOodfWFRD2fIY9aXcb8OUqpF+gRnqq8VjItv3hJshR9LNo50gU1N8guejLhjChjRkEX2NqNOGYvQ=; Expires=Sun, 29 Mar 2026 14:29:10 GMT; Path=/
+                - AWSALBTGCORS=x9dCI6oQRrQno+EaJ/Cp02w5V51h4ZygmwWp92kh4eoTMlZCKE/i36InEqyD/R14WfxAlpVY9NC8dPibvIlE6kcradRMKx9jstR9Vg0jOodfWFRD2fIY9aXcb8OUqpF+gRnqq8VjItv3hJshR9LNo50gU1N8guejLhjChjRkEX2NqNOGYvQ=; Expires=Sun, 29 Mar 2026 14:29:10 GMT; Path=/; SameSite=None; Secure
+                - brw=brw7kZ9CF4sPZgao3; path=/; expires=Mon, 22 Mar 2027 14:29:10 GMT; domain=.airtable.com; samesite=none; secure
+                - brwConsent=opt-in; path=/; expires=Sun, 22 Mar 2026 14:34:10 GMT; domain=.airtable.com; samesite=none; secure
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - DENY
+        status: 200 OK
+        code: 200
+        duration: 1.538387709s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 476
+        transfer_encoding: []
+        trailer: {}
+        host: api.airtable.com
+        remote_addr: ""
+        request_uri: ""
+        body: '{"records":[{"id":"recSwCMsuTlt6Pm7y","fields":{"assignee":null,"attachments":null,"barcode":null,"checkbox":true,"currency":99.99,"date":"2026-03-22","duration":0,"email":"test@example.com","link":null,"multi select":["selection 1","selection 2"],"name":"Integration Test Record (Updated)","notes":"Created by integration test","number":100,"percent":0,"phone number":"+1 555 123 4567","rating":4,"single select":"selection 2","url":"https://example.com"}}],"typecast":false}'
+        form: {}
+        headers:
+            Content-Type:
+                - application/json
+        url: https://api.airtable.com/v0/appojF8QxBOqb1Jvc/tblbO7Sj13weO8rdB
+        method: PATCH
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        transfer_encoding: []
+        trailer: {}
+        content_length: -1
+        uncompressed: true
+        body: '{"records":[{"id":"recSwCMsuTlt6Pm7y","createdTime":"2026-03-22T14:29:11.000Z","fields":{"name":"Integration Test Record (Updated)","notes":"Created by integration test","single select":"selection 2","formula":"1 + 2 = 3","checkbox":true,"date":"2026-03-22","created by":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"created time":"2026-03-22T14:29:11.000Z","Last Modified By":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"Last Modified":"2026-03-22T14:29:12.000Z","multi select":["selection 1","selection 2"],"phone number":"+1 555 123 4567","email":"test@example.com","url":"https://example.com","number":100,"currency":99.99,"percent":0,"duration":0,"rating":4,"button":{"label":"Button","url":"www.antfood.com"},"rollup":[],"count":0,"autonumber":3}}]}'
+        headers:
+            Access-Control-Allow-Headers:
+                - authorization,content-length,content-type,user-agent,x-airtable-application-id,x-airtable-user-agent,x-api-version,x-requested-with
+            Access-Control-Allow-Methods:
+                - DELETE,GET,OPTIONS,PATCH,POST,PUT
+            Access-Control-Allow-Origin:
+                - '*'
+            Airtable-Datacenter-Regions:
+                - us-east-1
+            Airtable-Uncompressed-Content-Length:
+                - "824"
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sun, 22 Mar 2026 14:29:12 GMT
+            Server:
+                - Tengine
+            Set-Cookie:
+                - AWSALBTG=IZ5UWIjkPkYXgCWlYJi3dJXpRr/MWHdrpPEOSaRImyqS2yTTFkIPKHI2tybzYxyISgyArWMx/M1OhunyXnFLkpKynJ6ouGCOzDTKNuJtjRts5RrP8Sj8TNOWnKIOGlzKCMk2ex3hPVf6rdM2eD8GRoVC51GJDQXNvnl3XfRW5pjQkW0y7NI=; Expires=Sun, 29 Mar 2026 14:29:12 GMT; Path=/
+                - AWSALBTGCORS=IZ5UWIjkPkYXgCWlYJi3dJXpRr/MWHdrpPEOSaRImyqS2yTTFkIPKHI2tybzYxyISgyArWMx/M1OhunyXnFLkpKynJ6ouGCOzDTKNuJtjRts5RrP8Sj8TNOWnKIOGlzKCMk2ex3hPVf6rdM2eD8GRoVC51GJDQXNvnl3XfRW5pjQkW0y7NI=; Expires=Sun, 29 Mar 2026 14:29:12 GMT; Path=/; SameSite=None; Secure
+                - brw=brw3OX2iu7qfp7H4E; path=/; expires=Mon, 22 Mar 2027 14:29:12 GMT; domain=.airtable.com; samesite=none; secure
+                - brwConsent=opt-in; path=/; expires=Sun, 22 Mar 2026 14:34:12 GMT; domain=.airtable.com; samesite=none; secure
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - DENY
+        status: 200 OK
+        code: 200
+        duration: 317.25025ms
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        transfer_encoding: []
+        trailer: {}
+        host: api.airtable.com
+        remote_addr: ""
+        request_uri: ""
+        body: ""
+        form: {}
+        headers:
+            Content-Type:
+                - application/json
+        url: https://api.airtable.com/v0/appojF8QxBOqb1Jvc/tblbO7Sj13weO8rdB/recSwCMsuTlt6Pm7y
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        transfer_encoding: []
+        trailer: {}
+        content_length: -1
+        uncompressed: true
+        body: '{"id":"recSwCMsuTlt6Pm7y","createdTime":"2026-03-22T14:29:11.000Z","fields":{"name":"Integration Test Record (Updated)","notes":"Created by integration test","single select":"selection 2","formula":"1 + 2 = 3","checkbox":true,"date":"2026-03-22","created by":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"created time":"2026-03-22T14:29:11.000Z","Last Modified By":{"id":"usrUluXd4j2EEgZnt","email":"pedro@antfood.com","name":"Pedro Botsaris"},"Last Modified":"2026-03-22T14:29:12.000Z","multi select":["selection 1","selection 2"],"phone number":"+1 555 123 4567","email":"test@example.com","url":"https://example.com","number":100,"currency":99.99,"percent":0,"duration":0,"rating":4,"button":{"label":"Button","url":"www.antfood.com"},"rollup":[],"count":0,"autonumber":3}}'
+        headers:
+            Access-Control-Allow-Headers:
+                - authorization,content-length,content-type,user-agent,x-airtable-application-id,x-airtable-user-agent,x-api-version,x-requested-with
+            Access-Control-Allow-Methods:
+                - DELETE,GET,OPTIONS,PATCH,POST,PUT
+            Access-Control-Allow-Origin:
+                - '*'
+            Airtable-Datacenter-Regions:
+                - us-east-1
+            Airtable-Uncompressed-Content-Length:
+                - "810"
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sun, 22 Mar 2026 14:29:12 GMT
+            Server:
+                - Tengine
+            Set-Cookie:
+                - AWSALBTG=EHCJv75AyLg1AtnD1sNCLgA3eru/P+g9Mw1qlD8N84Z1uMZmAbfnLhefAkM2PxUf1hhhbnp2b4vwdqi16FfNpoZwaFSVTifr/xj8aGaUL5wBJ+NMFsY8LFdG3ieeXE6ubS2nlUi3vG/UH0gdJOR0kg+enbsPIr/YjBc+IhX55IIauxlJ3dw=; Expires=Sun, 29 Mar 2026 14:29:12 GMT; Path=/
+                - AWSALBTGCORS=EHCJv75AyLg1AtnD1sNCLgA3eru/P+g9Mw1qlD8N84Z1uMZmAbfnLhefAkM2PxUf1hhhbnp2b4vwdqi16FfNpoZwaFSVTifr/xj8aGaUL5wBJ+NMFsY8LFdG3ieeXE6ubS2nlUi3vG/UH0gdJOR0kg+enbsPIr/YjBc+IhX55IIauxlJ3dw=; Expires=Sun, 29 Mar 2026 14:29:12 GMT; Path=/; SameSite=None; Secure
+                - brw=brwG3mVb1p8BZjMi9; path=/; expires=Mon, 22 Mar 2027 14:29:12 GMT; domain=.airtable.com; samesite=none; secure
+                - brwConsent=opt-in; path=/; expires=Sun, 22 Mar 2026 14:34:12 GMT; domain=.airtable.com; samesite=none; secure
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - DENY
+        status: 200 OK
+        code: 200
+        duration: 230.986625ms
+    - id: 3
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        transfer_encoding: []
+        trailer: {}
+        host: api.airtable.com
+        remote_addr: ""
+        request_uri: ""
+        body: ""
+        form: {}
+        headers:
+            Content-Type:
+                - application/json
+        url: https://api.airtable.com/v0/appojF8QxBOqb1Jvc/tblbO7Sj13weO8rdB?records%5B%5D=recSwCMsuTlt6Pm7y
+        method: DELETE
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        transfer_encoding: []
+        trailer: {}
+        content_length: -1
+        uncompressed: true
+        body: '{"records":[{"deleted":true,"id":"recSwCMsuTlt6Pm7y"}]}'
+        headers:
+            Access-Control-Allow-Headers:
+                - authorization,content-length,content-type,user-agent,x-airtable-application-id,x-airtable-user-agent,x-api-version,x-requested-with
+            Access-Control-Allow-Methods:
+                - DELETE,GET,OPTIONS,PATCH,POST,PUT
+            Access-Control-Allow-Origin:
+                - '*'
+            Airtable-Datacenter-Regions:
+                - us-east-1
+            Airtable-Uncompressed-Content-Length:
+                - "55"
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sun, 22 Mar 2026 14:29:12 GMT
+            Server:
+                - Tengine
+            Set-Cookie:
+                - AWSALBTG=J3/VfaMm4u0q3+ibXFkK8TfarK9lbNSiILbbHEkrwNhNutEpp0OUBK0Phg/QKa8kVHl3/bG39v1RyOtocFHaDeQJcF/4AsD/jvbKY3KaAY/zXzdEpVy63HF5cOwqYw1u6K80JBDuZBkGqQzGuBv9qV6D7T3dNy+y9a6qjbTytMi/3TJzrb4=; Expires=Sun, 29 Mar 2026 14:29:12 GMT; Path=/
+                - AWSALBTGCORS=J3/VfaMm4u0q3+ibXFkK8TfarK9lbNSiILbbHEkrwNhNutEpp0OUBK0Phg/QKa8kVHl3/bG39v1RyOtocFHaDeQJcF/4AsD/jvbKY3KaAY/zXzdEpVy63HF5cOwqYw1u6K80JBDuZBkGqQzGuBv9qV6D7T3dNy+y9a6qjbTytMi/3TJzrb4=; Expires=Sun, 29 Mar 2026 14:29:12 GMT; Path=/; SameSite=None; Secure
+                - brw=brwMYqOHBaINoahl2; path=/; expires=Mon, 22 Mar 2027 14:29:12 GMT; domain=.airtable.com; samesite=none; secure
+                - brwConsent=opt-in; path=/; expires=Sun, 22 Mar 2026 14:34:12 GMT; domain=.airtable.com; samesite=none; secure
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - DENY
+        status: 200 OK
+        code: 200
+        duration: 1.60192875s
+    - id: 4
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        transfer_encoding: []
+        trailer: {}
+        host: api.airtable.com
+        remote_addr: ""
+        request_uri: ""
+        body: ""
+        form: {}
+        headers:
+            Content-Type:
+                - application/json
+        url: https://api.airtable.com/v0/appojF8QxBOqb1Jvc/tblbO7Sj13weO8rdB/recSwCMsuTlt6Pm7y
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        transfer_encoding: []
+        trailer: {}
+        content_length: 251
+        uncompressed: false
+        body: '{"error":{"type":"INVALID_PERMISSIONS_OR_MODEL_NOT_FOUND","message":"Invalid permissions, or the requested model was not found. Check that both your user and your token have the required permissions, and that the model names and/or ids are correct."}}'
+        headers:
+            Access-Control-Allow-Headers:
+                - authorization,content-length,content-type,user-agent,x-airtable-application-id,x-airtable-user-agent,x-api-version,x-requested-with
+            Access-Control-Allow-Methods:
+                - DELETE,GET,OPTIONS,PATCH,POST,PUT
+            Access-Control-Allow-Origin:
+                - '*'
+            Airtable-Datacenter-Regions:
+                - us-east-1
+            Content-Length:
+                - "251"
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sun, 22 Mar 2026 14:29:14 GMT
+            Etag:
+                - W/"fb-E5+5oHBiiIUbRT5O+8F5CtGpkBQ"
+            Server:
+                - Tengine
+            Set-Cookie:
+                - AWSALBTG=AVcFpVq+dgpkpdVHHlt+6mag2XplUj2kzjO+ALdQhU/T/9IHlkhDDOYLiDZ3idw4sUgaiAhYQgNsn/dmepudHzJgC0d0Q4cx7srhhwJkACF6DQ3eljkRmLRrxuxxJYBDAikJZmaPqQdNfCHjTrSXpbNYNFDi2hnEUOBlyvLtZOcQqhZ8ZDY=; Expires=Sun, 29 Mar 2026 14:29:14 GMT; Path=/
+                - AWSALBTGCORS=AVcFpVq+dgpkpdVHHlt+6mag2XplUj2kzjO+ALdQhU/T/9IHlkhDDOYLiDZ3idw4sUgaiAhYQgNsn/dmepudHzJgC0d0Q4cx7srhhwJkACF6DQ3eljkRmLRrxuxxJYBDAikJZmaPqQdNfCHjTrSXpbNYNFDi2hnEUOBlyvLtZOcQqhZ8ZDY=; Expires=Sun, 29 Mar 2026 14:29:14 GMT; Path=/; SameSite=None; Secure
+                - brw=brw769IXR5GTsg3YY; path=/; expires=Mon, 22 Mar 2027 14:29:14 GMT; domain=.airtable.com; samesite=none; secure
+                - brwConsent=opt-in; path=/; expires=Sun, 22 Mar 2026 14:34:14 GMT; domain=.airtable.com; samesite=none; secure
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - DENY
+        status: 403 Forbidden
+        code: 403
+        duration: 207.247583ms

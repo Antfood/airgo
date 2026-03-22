@@ -198,8 +198,12 @@ func GetStructFieldJsonNames[T any](s T) ([]string, error) {
 
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
-		if name := field.Tag.Get("json"); name != "" {
-			fieldNames = append(fieldNames, name)
+		if jsonTag := field.Tag.Get("json"); jsonTag != "" && jsonTag != "-" {
+			// Handle tags with options like "name,omitempty"
+			if commaIdx := strings.Index(jsonTag, ","); commaIdx > 0 {
+				jsonTag = jsonTag[:commaIdx]
+			}
+			fieldNames = append(fieldNames, jsonTag)
 		}
 	}
 
